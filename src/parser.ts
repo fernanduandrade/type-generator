@@ -8,20 +8,52 @@ export const jsonToPrimitive = (json: any, mutableObj: any) => {
   }
   for(let i = 0; i < entries.length; i++) {
     const keyName = entries[i][0]
-    const value = validateEntryValue(entries[i][1])
-    mutableObj[keyName] = value;
+    const value = entries[i][1]
+    let newValue
+    let newValue2
+    if(verifyIfObjHasChildren(value)) {
+      console.log('caiu aqui')
+      newValue2 = jsonToPrimitive2(value)
+    } else {
+      newValue = validateEntryValue(value)
+    }
+    
+    if(!newValue2) mutableObj[keyName] = newValue2;
+    mutableObj[keyName] = newValue;
   }
 
   console.log(mutableObj)
 }
 
+
+export const jsonToPrimitive2 = (json: any) => {
+  let entries
+  if(Array.isArray(json)) {
+    entries = getEntries(json[0])
+  } else {
+    entries = getEntries(json)
+  }
+  for(let i = 0; i < entries.length; i++) {
+    const keyName = entries[i][0]
+    const value = entries[i][1]
+    let newObj = {} as any
+    const newValue = validateEntryValue(value)
+    
+    newObj[keyName] = newValue;
+    return newObj
+  }
+}
+
 export const getEntries = (json: any) => Object.entries(json);
 
 export const validateEntryValue = (entry: any) => {
-  console.log(typeof entry)
   if(typeof entry === 'string') return ''
   if(typeof entry === 'boolean') return false
   if(typeof entry === 'number') return 0
+}
+
+const verifyIfObjHasChildren = (obj: any) => {
+  return Object.keys(obj).length > 1
 }
 
 // const json = {
