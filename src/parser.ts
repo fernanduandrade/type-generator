@@ -1,4 +1,5 @@
- 
+import * as R from 'ramda'
+
 export const jsonToPrimitive = (json: any, mutableObj: any) => {
   let entries
   if(Array.isArray(json)) {
@@ -10,19 +11,19 @@ export const jsonToPrimitive = (json: any, mutableObj: any) => {
     const keyName = entries[i][0]
     const value = entries[i][1]
     let newValue
-    let newValue2
+    let newValue2 = {}
     if(verifyIfObjHasChildren(value)) {
-      console.log('caiu aqui')
       newValue2 = jsonToPrimitive2(value)
     } else {
       newValue = validateEntryValue(value)
     }
-    
-    if(!newValue2) mutableObj[keyName] = newValue2;
-    mutableObj[keyName] = newValue;
+    if(!R.isEmpty(newValue2)) {
+      mutableObj[keyName] =newValue2
+    } else {
+      mutableObj[keyName] = newValue
+    }
   }
-
-  console.log(mutableObj)
+  return mutableObj
 }
 
 
@@ -33,15 +34,20 @@ export const jsonToPrimitive2 = (json: any) => {
   } else {
     entries = getEntries(json)
   }
+  let newObj = {} as any
   for(let i = 0; i < entries.length; i++) {
     const keyName = entries[i][0]
     const value = entries[i][1]
-    let newObj = {} as any
-    const newValue = validateEntryValue(value)
-    
+    let newValue
+    if(verifyIfObjHasChildren(value)) {
+      newValue = jsonToPrimitive2(value)
+    } else {
+      newValue = validateEntryValue(value)
+    }
     newObj[keyName] = newValue;
-    return newObj
+    console.log(newObj)
   }
+  return newObj
 }
 
 export const getEntries = (json: any) => Object.entries(json);
@@ -53,26 +59,6 @@ export const validateEntryValue = (entry: any) => {
 }
 
 const verifyIfObjHasChildren = (obj: any) => {
+  if(typeof obj !== 'object') return false;
   return Object.keys(obj).length > 1
 }
-
-// const json = {
-//   id: 2,
-//   name: 'Ervin Howell',
-//   username: 'Antonette',
-//   email: 'Shanna@melissa.tv',
-//   address: {
-//     street: 'Victor Plains',
-//     suite: 'Suite 879',
-//     city: 'Wisokyburgh',
-//     zipcode: '90566-7771',
-//     geo: [Object]
-//   },
-//   phone: '010-692-6593 x09125',
-//   website: 'anastasia.net',
-//   company: {
-//     name: 'Deckow-Crist',
-//     catchPhrase: 'Proactive didactic contingency',
-//     bs: 'synergize scalable supply-chains'
-//   }
-// }
