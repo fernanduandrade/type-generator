@@ -1,21 +1,9 @@
-import axios from 'axios'
-import { jsonToPrimitive } from './utils/parseJson'
-import prompt from './utils/promtHelper';
-export const ProvideType =  async (baseUrl: string) => {
-  const response = axios(`${baseUrl}`, {});
-  const newObj = {}
-  return jsonToPrimitive((await response).data, newObj)
-}
+import GetType from './services/fetch-type'
+import prompt from './utils/promt-helper';
 
-function run() {
-  const entityPrompt = prompt(`enter with the entity name: `)
-  const uriPrompt = prompt(`enter with the json url: `)
+const entityPrompt = prompt(`enter with the entity name: `)
+const uriPrompt = prompt(`enter with the json url: `)
   
-  ProvideType(`${uriPrompt}`).then(res => {
-    console.log(`type ${entityPrompt} = ${JSON.stringify(res, null, 2).replace(/\"/g, "")}`)
-  })
-}
-
-
-
-run()
+GetType(`${uriPrompt}`).then(res => {
+  console.log(`type ${entityPrompt} = ${JSON.stringify(res, null, 2).replace(/\"/g, "")}`)
+})

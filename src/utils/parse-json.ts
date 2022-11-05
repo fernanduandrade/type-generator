@@ -1,5 +1,5 @@
 import * as R from 'ramda'
-import { validateEntry, getJsonEntries } from './entriesFunction'
+import { validateEntry, getJsonEntries } from './entries-function'
 
 export const jsonToPrimitive = (json: any, mutableObj: any) => {
   let entries
