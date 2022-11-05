@@ -1,11 +1,12 @@
 import * as R from 'ramda'
+import { validateEntry, getJsonEntries } from './entriesFunction'
 
 export const jsonToPrimitive = (json: any, mutableObj: any) => {
   let entries
   if(Array.isArray(json)) {
-    entries = getEntries(json[0])
+    entries = getJsonEntries(json[0])
   } else {
-    entries = getEntries(json)
+    entries = getJsonEntries(json)
   }
   for(let i = 0; i < entries.length; i++) {
     const keyName = entries[i][0]
@@ -15,7 +16,7 @@ export const jsonToPrimitive = (json: any, mutableObj: any) => {
     if(verifyIfObjHasChildren(value)) {
       newValue2 = jsonToPrimitive2(value)
     } else {
-      newValue = validateEntryValue(value)
+      newValue = validateEntry(value)
     }
     if(!R.isEmpty(newValue2)) {
       mutableObj[keyName] =newValue2
@@ -30,9 +31,9 @@ export const jsonToPrimitive = (json: any, mutableObj: any) => {
 export const jsonToPrimitive2 = (json: any) => {
   let entries
   if(Array.isArray(json)) {
-    entries = getEntries(json[0])
+    entries = getJsonEntries(json[0])
   } else {
-    entries = getEntries(json)
+    entries = getJsonEntries(json)
   }
   let newObj = {} as any
   for(let i = 0; i < entries.length; i++) {
@@ -42,19 +43,11 @@ export const jsonToPrimitive2 = (json: any) => {
     if(verifyIfObjHasChildren(value)) {
       newValue = jsonToPrimitive2(value)
     } else {
-      newValue = validateEntryValue(value)
+      newValue = validateEntry(value)
     }
     newObj[keyName] = newValue;
   }
   return newObj
-}
-
-export const getEntries = (json: any) => Object.entries(json);
-
-export const validateEntryValue = (entry: any) => {
-  if(typeof entry === 'string') return "string"
-  if(typeof entry === 'boolean') return "boolean"
-  if(typeof entry === 'number') return "number"
 }
 
 const verifyIfObjHasChildren = (obj: any) => {
