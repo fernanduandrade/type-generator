@@ -45,7 +45,6 @@ export const jsonToPrimitive2 = (json: any) => {
       newValue = validateEntryValue(value)
     }
     newObj[keyName] = newValue;
-    console.log(newObj)
   }
   return newObj
 }
@@ -53,9 +52,9 @@ export const jsonToPrimitive2 = (json: any) => {
 export const getEntries = (json: any) => Object.entries(json);
 
 export const validateEntryValue = (entry: any) => {
-  if(typeof entry === 'string') return ''
-  if(typeof entry === 'boolean') return false
-  if(typeof entry === 'number') return 0
+  if(typeof entry === 'string') return "string"
+  if(typeof entry === 'boolean') return "boolean"
+  if(typeof entry === 'number') return "number"
 }
 
 const verifyIfObjHasChildren = (obj: any) => {
