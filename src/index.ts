@@ -1,9 +1,12 @@
 import GetType from './services/fetch-type'
-import prompt from './utils/promt-helper';
+import { getUserInputs, copyResultToClipBoard } from './utils/prompt-helper';
 
 
-const { entityInput, jsonUrlInput } = prompt()
+const { entityInput, jsonUrlInput } = getUserInputs()
 
 GetType(`${jsonUrlInput}`).then(res => {
-  console.log(`type ${entityInput} = ${JSON.stringify(res, null, 2).replace(/\"/g, "")}`)
+  const resultStringify = JSON.stringify(res, null, 2).replace(/\"/g, "")
+  const output = `type ${entityInput} = ${resultStringify}`
+  console.log(output)
+  copyResultToClipBoard(output)
 })
