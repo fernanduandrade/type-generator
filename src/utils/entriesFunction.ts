@@ -10,4 +10,4 @@ export const validateEntry = (entry: unknown) => {
   ])(entryType)
 }
 
-export const getJsonEntries = (json: any) => Object.entries(json)
+export const getJsonEntries = (json: object) => Object.entries(json)

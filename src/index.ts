@@ -7,9 +7,15 @@ export const ProvideType =  async (baseUrl: string) => {
   return jsonToPrimitive((await response).data, newObj)
 }
 
-const entityPrompt = prompt(`enter with the entity name: `)
-const uriPrompt = prompt(`enter with the json url: `)
+function run() {
+  const entityPrompt = prompt(`enter with the entity name: `)
+  const uriPrompt = prompt(`enter with the json url: `)
+  
+  ProvideType(`${uriPrompt}`).then(res => {
+    console.log(`type ${entityPrompt} = ${JSON.stringify(res, null, 2).replace(/\"/g, "")}`)
+  })
+}
 
-ProvideType(`${uriPrompt}`).then(res => {
-  console.log(`type ${entityPrompt} = ${JSON.stringify(res, null, 2).replace(/\"/g, "")}`)
-})
+
+
+run()

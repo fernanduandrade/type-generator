@@ -1,6 +1,6 @@
 {
   "name": "fetch-type-provider",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "A package that fetches a json and return the properties with it types",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
@@ -25,7 +25,7 @@
     "fetch json",
     "type provider"
   ],
-  "author": "Fernando Andrade",
+  "author": "Fernando Andrade <onanduandrade@gmail.com>",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/fernanduandrade/type-generator/issues"
@@ -52,5 +52,8 @@
   "dependencies": {
     "axios": "^1.1.3",
     "ramda": "^0.28.0"
+  },
+  "bin": {
+    "fetch-type": "./index.js"
   }
 }
