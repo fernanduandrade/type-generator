@@ -1,7 +1,8 @@
 import * as R from 'ramda'
-import { validateEntry, getJsonEntries } from './entries-function'
+import { validateEntry, getJsonEntries, verifyIfObjHasChildren } from './entries-function'
 
-export const jsonToPrimitive = (json: any, mutableObj: any) => {
+export const jsonToPrimitive = (json: any) => {
+  let mutableObj: any = {}
   let entries
   if(Array.isArray(json)) {
     entries = getJsonEntries(json[0])
@@ -50,7 +51,4 @@ export const jsonToPrimitive2 = (json: any) => {
   return newObj
 }
 
-const verifyIfObjHasChildren = (obj: any) => {
-  if(typeof obj !== 'object') return false;
-  return Object.keys(obj).length > 1
-}
+
