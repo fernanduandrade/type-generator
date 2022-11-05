@@ -12,7 +12,7 @@ export const validateEntry = (entry: unknown) => {
 
 export const getJsonEntries = (json: object) => Object.entries(json)
 
-export const verifyIfObjHasChildren = (obj: object) => {
+export const verifyIfObjHasChildren = (obj: object | string | number | boolean) => {
   if(typeof obj !== 'object') return false;
-  return Object.keys(obj).length
+  return Object.keys(obj).length > 1
 }
