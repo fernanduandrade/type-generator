@@ -1,13 +1,13 @@
 import * as R from 'ramda'
-import { validateEntry, getJsonEntries, verifyIfObjHasChildren } from './entries-function'
+import { validateEntry, getEntriesFromObj, verifyIfObjHasChildren } from './entries-function'
 
 export const jsonToPrimitive = (json: any) => {
-  let mutableObj: any = {}
+  const mutableObj: any = {}
   let entries
   if(Array.isArray(json)) {
-    entries = getJsonEntries(json[0])
+    entries = getEntriesFromObj(json[0])
   } else {
-    entries = getJsonEntries(json)
+    entries = getEntriesFromObj(json)
   }
   for(let i = 0; i < entries.length; i++) {
     const keyName = entries[i][0]
@@ -32,11 +32,11 @@ export const jsonToPrimitive = (json: any) => {
 export const jsonToPrimitive2 = (json: any) => {
   let entries
   if(Array.isArray(json)) {
-    entries = getJsonEntries(json[0])
+    entries = getEntriesFromObj(json[0])
   } else {
-    entries = getJsonEntries(json)
+    entries = getEntriesFromObj(json)
   }
-  let newObj = {} as any
+  const newObj = {} as any
   for(let i = 0; i < entries.length; i++) {
     const keyName = entries[i][0]
     const value = entries[i][1]

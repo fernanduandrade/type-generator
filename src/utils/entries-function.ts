@@ -10,7 +10,7 @@ export const validateEntry = (entry: unknown) => {
   ])(entryType)
 }
 
-export const getJsonEntries = (json: object) => Object.entries(json)
+export const getEntriesFromObj = (json: object) => Object.entries(json)
 
 export const verifyIfObjHasChildren = (obj: object | string | number | boolean) => {
   if(typeof obj !== 'object') return false;
