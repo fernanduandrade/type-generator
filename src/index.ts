@@ -11,5 +11,3 @@ export function fetchType() {
     copyResultToClipBoard(output)
   })
 }
-
-fetchType()
