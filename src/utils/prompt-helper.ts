@@ -13,7 +13,10 @@ export const getUserInputs = () => {
 export const copyResultToClipBoard = (result: string) => {
   console.log('would you like to copy the result to your the clipboard?')
   const userAnswer = prompt('enter with yes or no: ')
-  if(userAnswer === 'yes') { 
-    ncp.copy(result)
-  } else ('thanks for giving the a try 😉')
+  if(userAnswer === 'yes')  { 
+    ncp.copy(result) 
+    console.log('copied!! thanks for giving a try 😉')
+  } else {
+    console.log('thanks for giving a try 😉')
+  }
 }
