@@ -1,4 +1,3 @@
-import * as R from 'ramda'
 import { validateEntry, getEntriesFromObj, verifyIfObjHasChildren } from './entries-function'
 import { CustomObject } from './types'
 
@@ -22,7 +21,7 @@ export const findPrimitives = (json: object) => {
   for(let i = 0; i < entries.length; i++) {
     const keyName = entries[i][0]
     const value = entries[i][1]
-    let newValue = verifyIfObjHasChildren(value) ? findPrimitives(value) : validateEntry(value)
+    const newValue = verifyIfObjHasChildren(value) ? findPrimitives(value) : validateEntry(value)
     obj[keyName] = newValue;
   }
   return obj
