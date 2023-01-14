@@ -11,7 +11,7 @@
     "format": "prettier --write \"src/**/*.ts\" \"src/**/*.js\"",
     "lint": "tslint -p tsconfig.json",
     "prepare": "npm run build",
-    "prepublishOnly" : "npm test && npm run lint",
+    "prepublishOnly": "npm test && npm run lint",
     "preversion": "npm run lint",
     "version": "npm run format && git add -A src",
     "postversion": "git push && git push --tags"
@@ -33,6 +33,7 @@
   },
   "homepage": "https://github.com/fernanduandrade/type-generator#readme",
   "devDependencies": {
+    "@sweet-monads/either": "^3.1.0",
     "@types/axios": "^0.14.0",
     "@types/copy-paste": "^1.1.30",
     "@types/jest": "^29.2.0",
